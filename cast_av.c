@@ -15,7 +15,7 @@ void	cast_pointer(t_val val, va_list args)
 		buf = str;
 	else
 		{
-			tmp = ft_itoa_base(str, 16, 0);
+			tmp = ft_itoa_base(ret, 16, 0);
 			buf = ft_strjoin(str, tmp);
 			free(tmp);
 			free(str);
