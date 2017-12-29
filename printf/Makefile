@@ -1,20 +1,6 @@
-
 NAME = libftprintf.a
 
-CFLAGS = -Wall -Wextra -Werror
-
 INCLUDES = -I ft_printf.h
-
-OBJECTS =	ft_width.o \
-			itoas.o \
-			libft_func.o \
-			libft_func2.o \
-			mod_av.o \
-			read_av.o \
-			cast_av.o \
-			wide_str.o \
-			wide_help.o \
-			mod_char.o
 
 SRC =	ft_width.c \
 		itoas.c \
@@ -27,11 +13,17 @@ SRC =	ft_width.c \
 		wide_help.c \
 		mod_char.c
 
+CFLAGS = -Wall -Wextra -Werror
+
+OBJECTS = $(SRC:.c=.o)
+
 all :	$(NAME)
 
-$(NAME) :
-	gcc -c $(CFLAGS) $(SRC) $(INCLUDES)
+$(NAME) : $(OBJECTS)
 	ar rc $(NAME) $(OBJECTS)
+
+%.o: %.c $(HEADER)
+	gcc -c $(CFLAGS) -o $@ $<
 
 clean :
 	rm -rf $(OBJECTS)
