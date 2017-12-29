@@ -1,5 +1,28 @@
 #include "ft_printf.h"
 
+void	cast_pointer(t_val val, va_list args)
+{
+	uintmax_t ret;
+	char *str;
+	char *tmp;
+	char *buf;
+
+	str = ft_strnew(2);
+	str[0] = '0';
+	str[1] = 'x';
+	ret = (uintmax_t)va_arg(args, void*);
+	if (ret == 0 && val.prec != -1)
+		buf = str;
+	else
+		{
+			tmp = ft_itoa_base(str, 16, 0);
+			buf = ft_strjoin(str, tmp);
+			free(tmp);
+			free(str);
+		}
+		ft_mod(buf, val, 1);
+}
+
 void	cast_char(t_val val, va_list args)
 {
 	char *str;
@@ -81,6 +104,6 @@ void	ft_cast(t_val val, va_list args)
 		cast_int(val, args);
 	else if (val.bukva == 'o' || val.bukva == 'O' || val.bukva == 'u' || val.bukva == 'U' || val.bukva == 'x' || val.bukva == 'X')
 		cast_unsigned(val, args);
-// 	else if (val.bukva == 'p')
-// 		cast_pointer(val, args);
+ 	else if (val.bukva == 'p')
+ 		cast_pointer(val, args);
 }
