@@ -116,7 +116,7 @@ int   parse_args(const char *str, int i, va_list args)
   val.bukva = str[i];
   if (val.bukva == 's' || val.bukva == 'S' || val.bukva == 'o' || val.bukva == 'O' 
   	|| val.bukva == 'u' || val.bukva == 'U' || val.bukva == 'd' || val.bukva == 'D' || val.bukva == 'i'
-  	|| val.bukva == 'x' || val.bukva == 'X' || val.bukva == 'c' || val.bukva == 'C')
+  	|| val.bukva == 'x' || val.bukva == 'X' || val.bukva == 'c' || val.bukva == 'C' || val.bukva == 'p')
   	ft_cast(val, args);
   else
   	ft_help(val);
