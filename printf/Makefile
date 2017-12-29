@@ -27,7 +27,7 @@ SRC =	ft_width.c \
 		wide_help.c \
 		mod_char.c
 
-all : $(NAME)
+all :	$(NAME)
 
 $(NAME) :
 	gcc -c $(CFLAGS) $(SRC) $(INCLUDES)
@@ -36,7 +36,7 @@ $(NAME) :
 clean :
 	rm -rf $(OBJECTS)
 
-fclean : clean
+fclean :	clean
 	rm -rf $(NAME)
 
-re : fclean all
+re :	fclean all
