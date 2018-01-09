@@ -1,11 +1,37 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_width.c                                         :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: dlyubich <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2018/01/09 14:41:50 by dlyubich          #+#    #+#             */
+/*   Updated: 2018/01/09 14:41:51 by dlyubich         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "ft_printf.h"
+
+void	ft_width_help(char **str, t_val val, int len)
+{
+	char	*tmp;
+	char	*buf;
+
+	tmp = ft_strnew(val.width - len);
+	ft_memset(tmp, ' ', val.width - len);
+	buf = *str;
+	if (val.minus > 0)
+		*str = ft_strjoin(*str, tmp);
+	else
+		*str = ft_strjoin(tmp, *str);
+	free(tmp);
+	free(buf);
+}
 
 char	*ft_width(char *str, t_val val)
 {
-	char *tmp;
-	int len;
-	char *buf;
-	int tm;
+	int		len;
+	int		tm;
 
 	if ((len = ft_strlen(str)) < val.width)
 	{
@@ -22,17 +48,7 @@ char	*ft_width(char *str, t_val val)
 			return (str);
 		}
 		else
-		{
-			tmp = ft_strnew(val.width - len);
-			ft_memset(tmp, ' ', val.width - len);
-			buf = str;
-			if (val.minus > 0)
-				str = ft_strjoin(str, tmp);
-			else
-				str = ft_strjoin(tmp, str);
-		}
-		free(tmp);
-		free(buf);
+			ft_width_help(&str, val, len);
 	}
 	return (str);
 }

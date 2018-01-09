@@ -1,11 +1,23 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   cast_av.c                                          :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: dlyubich <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2018/01/09 14:35:24 by dlyubich          #+#    #+#             */
+/*   Updated: 2018/01/09 14:35:28 by dlyubich         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "ft_printf.h"
 
 void	cast_pointer(t_val val, va_list args)
 {
-	uintmax_t ret;
-	char *str;
-	char *tmp;
-	char *buf;
+	uintmax_t	ret;
+	char		*str;
+	char		*tmp;
+	char		*buf;
 
 	str = ft_strnew(2);
 	str[0] = '0';
@@ -14,24 +26,29 @@ void	cast_pointer(t_val val, va_list args)
 	if (ret == 0 && val.prec != -1)
 		buf = str;
 	else
-		{
-			tmp = ft_itoa_base(ret, 16, 0);
-			buf = ft_strjoin(str, tmp);
-			free(tmp);
-			free(str);
-		}
-		ft_mod(buf, val, 1);
+	{
+		tmp = ft_itoa_base(ret, 16, 0);
+		buf = ft_strjoin(str, tmp);
+		free(tmp);
+		free(str);
+	}
+	ft_mod(buf, val, 1);
 }
 
 void	cast_char(t_val val, va_list args)
 {
-	char *str;
+	char	*str;
+	wchar_t *wstr;
 
 	if (val.bukva == 'S' || (val.bukva == 's' && val.size == 3))
-		ft_widestr(va_arg(args, wchar_t*), val);
-	else 
 	{
-
+		if (!(wstr = va_arg(args, wchar_t*)))
+			ft_widestr(L"(null)", val);
+		else
+			ft_widestr(wstr, val);
+	}
+	else
+	{
 		str = NULL;
 		if (val.bukva == 's')
 		{
@@ -94,16 +111,16 @@ void	cast_unsigned(t_val val, va_list args)
 		ft_mod(ft_itoa_base(ret, 16, val.bukva == 'X' ? 1 : 0), val, 1);
 }
 
-
-
 void	ft_cast(t_val val, va_list args)
 {
-	if (val.bukva == 's' || val.bukva =='S' || val.bukva =='c' || val.bukva =='C')
+	if (val.bukva == 's' || val.bukva == 'S' ||
+		val.bukva == 'c' || val.bukva == 'C')
 		cast_char(val, args);
 	else if (val.bukva == 'd' || val.bukva == 'D' || val.bukva == 'i')
 		cast_int(val, args);
-	else if (val.bukva == 'o' || val.bukva == 'O' || val.bukva == 'u' || val.bukva == 'U' || val.bukva == 'x' || val.bukva == 'X')
+	else if (val.bukva == 'o' || val.bukva == 'O' || val.bukva == 'u'
+		|| val.bukva == 'U' || val.bukva == 'x' || val.bukva == 'X')
 		cast_unsigned(val, args);
- 	else if (val.bukva == 'p')
- 		cast_pointer(val, args);
+	else if (val.bukva == 'p')
+		cast_pointer(val, args);
 }

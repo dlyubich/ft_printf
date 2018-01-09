@@ -1,6 +1,18 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   libft_func2.c                                      :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: dlyubich <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2018/01/09 15:05:46 by dlyubich          #+#    #+#             */
+/*   Updated: 2018/01/09 15:05:47 by dlyubich         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "ft_printf.h"
 
-char	*ft_strsub(char const *s, unsigned int start, size_t len)
+char				*ft_strsub(char const *s, unsigned int start, size_t len)
 {
 	char			*str;
 	unsigned int	i;
@@ -23,7 +35,7 @@ char	*ft_strsub(char const *s, unsigned int start, size_t len)
 	return (0);
 }
 
-int	ft_tolower(int c)
+int					ft_tolower(int c)
 {
 	if (c >= 65 && c <= 90)
 		c += 32;

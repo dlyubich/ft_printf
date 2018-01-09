@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   wide_help.c                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: dlyubich <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2018/01/09 16:15:38 by dlyubich          #+#    #+#             */
+/*   Updated: 2018/01/09 16:15:39 by dlyubich         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "ft_printf.h"
 
 void		ft_wputstr(char **d)
@@ -45,30 +57,30 @@ void		ft_place_char(int size, char c)
 	}
 }
 
-void	ft_char(t_val val, va_list args)
+void		ft_char(t_val val, va_list args)
 {
-	int            c;
-    char        ch;
+	int			c;
+	char		ch;
 
-    ch = ' ';
-    c = va_arg(args, int);
-    if (val.width > 0)
-    {
-        if (val.zero == 1)
-            ch = '0';
-        if (val.minus == 1)
-        {
-            g_count += write(1, &c, 1);
-            ft_place_char(val.width - 1, ch);
-        }
-        else
-        {
-            ft_place_char(val.width - 1, ch);
-             g_count += write(1, &c, 1);
-        }
-    }
-    else
-         g_count += write(1, &c, 1);
+	ch = ' ';
+	c = va_arg(args, int);
+	if (val.width > 0)
+	{
+		if (val.zero == 1)
+			ch = '0';
+		if (val.minus == 1)
+		{
+			g_count += write(1, &c, 1);
+			ft_place_char(val.width - 1, ch);
+		}
+		else
+		{
+			ft_place_char(val.width - 1, ch);
+			g_count += write(1, &c, 1);
+		}
+	}
+	else
+		g_count += write(1, &c, 1);
 }
 
 char		*ft_strdup(char *src)

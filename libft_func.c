@@ -1,6 +1,18 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   libft_func.c                                       :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: dlyubich <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2018/01/09 15:04:05 by dlyubich          #+#    #+#             */
+/*   Updated: 2018/01/09 15:04:06 by dlyubich         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "ft_printf.h"
 
-int	ft_isdigit(int c)
+int					ft_isdigit(int c)
 {
 	if (c >= '0' && c <= '9')
 		return (1);
@@ -8,9 +20,9 @@ int	ft_isdigit(int c)
 		return (0);
 }
 
-char	*ft_strnew(size_t size)
+char				*ft_strnew(size_t size)
 {
-	char	*s;
+	char			*s;
 
 	s = (char*)malloc(size * sizeof(char) + 1);
 	if (s == NULL)
@@ -18,7 +30,7 @@ char	*ft_strnew(size_t size)
 	return (ft_memset(s, (int)'\0', size + 1));
 }
 
-void	*ft_memset(void *b, int c, size_t len)
+void				*ft_memset(void *b, int c, size_t len)
 {
 	unsigned char	*s;
 
@@ -30,7 +42,7 @@ void	*ft_memset(void *b, int c, size_t len)
 	return (b);
 }
 
-char	*ft_strjoin(char const *s1, char const *s2)
+char				*ft_strjoin(char const *s1, char const *s2)
 {
 	char			*str;
 	unsigned int	i;
@@ -57,9 +69,9 @@ char	*ft_strjoin(char const *s1, char const *s2)
 	return (str);
 }
 
-size_t		ft_strlen(const char *s)
+size_t				ft_strlen(const char *s)
 {
-	size_t	i;
+	size_t			i;
 
 	i = 0;
 	while (s[i])

@@ -1,37 +1,24 @@
-#******************************************************************************#
-#                                                                              #
-#                                                         :::      ::::::::    #
-#    Makefile                                           :+:      :+:    :+:    #
-#                                                     +:+ +:+         +:+      #
-#    By: dlyubich <marvin@42.fr>                    +#+  +:+       +#+         #
-#                                                 +#+#+#+#+#+   +#+            #
-#    Created: 2017/12/29 17:16:42 by dlyubich          #+#    #+#              #
-#    Updated: 2017/12/29 17:19:41 by dlyubich         ###   ########.fr        #
-#                                                                              #
-#******************************************************************************#
 
 NAME = libftprintf.a
 
 CFLAGS = -Wall -Wextra -Werror
 
-INCLUDES = -I libftprintf.h
+INCLUDES = -I ft_printf.h
 
-OBJECTS = cast_av.o ft_width.o itoas.o libft_func.o	libft_func2.o \
-		  mod_av.o mod_char.o read_av.o wide_help.o wide_str.o \
+OBJECTS = ft_width.o itoas.o libft_func.o libft_func2.o mod_av.o read_av.o cast_av.o wide_str.o wide_help.o mod_char.o read_av_help.o
 
-SRC = cast_av.c ft_width.c itoas.c libft_func.c libft_func2.c \
-	  mod_av.c mod_char.c read_av.c wide_help.c wide_str.c \
+SRC = ft_width.c itoas.c libft_func.c libft_func2.c mod_av.c read_av.c cast_av.c wide_str.c wide_help.c mod_char.c read_av_help.c
 
 all : $(NAME)
 
-$(NAME) : 
+$(NAME) :
 	gcc -c $(CFLAGS) $(SRC) $(INCLUDES)
 	ar rc $(NAME) $(OBJECTS)
 
-clean : 
+clean :
 	rm -rf $(OBJECTS)
 
-fclean : clean 
+fclean : clean
 	rm -rf $(NAME)
 
 re : fclean all
