@@ -54,7 +54,7 @@ int			parse_args(const char *str, int i, va_list args)
 	{
 		tmp = i;
 		i = parse_sign(str, i, &val);
-		i = parse_dig(str, i, &val);
+		i = parse_dig(str, i, &val, args);
 		i = parse_bukva(str, i, &val);
 		if (tmp == i)
 			break ;

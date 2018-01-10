@@ -68,7 +68,7 @@ void			ft_modchar(char *str, t_val val);
 char			*ft_mod_resh(char *str, t_val val);
 char			*ft_mod_sign(char *str, t_val val);
 int				parse_sign(const char *str, int i, t_val *val);
-int				parse_dig(const char *str, int i, t_val *val);
+int				parse_dig(const char *str, int i, t_val *val, va_list args);
 int				parse_bukva(const char *str, int i, t_val *val);
 void			parse_next(t_val val, va_list args);
 void			ft_help(t_val val);

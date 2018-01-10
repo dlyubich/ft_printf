@@ -32,26 +32,49 @@ int		parse_sign(const char *str, int i, t_val *val)
 	return (i);
 }
 
-int		parse_dig(const char *str, int i, t_val *val)
+int		parse_width(const char *str, int i, t_val *val, va_list args)
 {
-	while (ft_isdigit(str[i]))
+	if (str[i] == '*')
 	{
-		val->width = val->width * 10 + str[i] - '0';
-		i++;
+		val->width = va_arg(args, int);
+		if (val->width < 0)
+		{
+			val->width *= -1;
+			val->minus = 1;
+		}
 	}
-	if (str[i] == '.' && ft_isdigit(str[i + 1]) && (i += 1))
+	else
 	{
-		val->prec = 0;
 		while (ft_isdigit(str[i]))
 		{
-			val->prec = val->prec * 10 + str[i] - '0';
+			val->width = val->width * 10 + str[i] - '0';
 			i++;
 		}
 	}
-	else if (str[i] == '.')
+	return (i);
+}
+
+int		parse_dig(const char *str, int i, t_val *val, va_list args)
+{
+	i = parse_width(str, i, val, args);
+	if (str[i] == '.')
 	{
 		val->prec = 0;
 		i++;
+		if (str[i] == '*')
+		{
+			val->prec = va_arg(args, int);
+			if (val->prec < 0)
+				val->prec = -1;
+		}
+		else
+		{
+			while (ft_isdigit(str[i]))
+			{
+				val->prec = val->prec * 10 + str[i] - '0';
+				i++;
+			}
+		}
 	}
 	return (i);
 }
@@ -83,28 +106,4 @@ void	parse_next(t_val val, va_list args)
 		ft_cast(val, args);
 	else
 		ft_help(val);
-}
-
-void	ft_help(t_val val)
-{
-	char *str;
-
-	if (val.bukva == '\0')
-		return ;
-	else if (val.width <= 0)
-		g_count += write(1, &val.bukva, 1);
-	else
-	{
-		str = ft_strnew(val.width);
-		if (val.zero > 0)
-			ft_memset(str, '0', val.width);
-		else
-			ft_memset(str, ' ', val.width);
-		if (val.minus > 0)
-			str[0] = val.bukva;
-		else
-			str[val.width - 1] = val.bukva;
-		g_count += write(1, str, val.width);
-		free(str);
-	}
 }

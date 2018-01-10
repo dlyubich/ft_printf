@@ -85,3 +85,27 @@ void		ft_modchar(char *str, t_val val)
 		g_count += write(1, str, len);
 	free(str);
 }
+
+void		ft_help(t_val val)
+{
+	char	*str;
+
+	if (val.bukva == '\0')
+		return ;
+	else if (val.width <= 0)
+		g_count += write(1, &val.bukva, 1);
+	else
+	{
+		str = ft_strnew(val.width);
+		if (val.zero > 0)
+			ft_memset(str, '0', val.width);
+		else
+			ft_memset(str, ' ', val.width);
+		if (val.minus > 0)
+			str[0] = val.bukva;
+		else
+			str[val.width - 1] = val.bukva;
+		g_count += write(1, str, val.width);
+		free(str);
+	}
+}
