@@ -42,6 +42,7 @@ int		parse_width(const char *str, int i, t_val *val, va_list args)
 			val->width *= -1;
 			val->minus = 1;
 		}
+		i++;
 	}
 	else
 	{
@@ -66,6 +67,7 @@ int		parse_dig(const char *str, int i, t_val *val, va_list args)
 			val->prec = va_arg(args, int);
 			if (val->prec < 0)
 				val->prec = -1;
+			i++;
 		}
 		else
 		{
